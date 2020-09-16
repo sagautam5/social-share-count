@@ -1,0 +1,38 @@
+{
+    "name": "sagautam5/social-share-count",
+
+    "description": "A laravel package to count number of time a url is shared in social media",
+
+    "type": "library",
+
+    "license": "MIT",
+
+    "authors": [
+
+        {
+            "name": "Sagar Gautam",
+
+            "email": "sagautam5@gmail.com"
+        }
+    ],
+
+    "minimum-stability": "dev",
+
+    "require": {},
+
+    "autoload": {
+
+        "psr-4": {
+
+            "Sagautam5\\SocialShareCount\\": "src/"
+
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Sagautam5\\SocialShareCount\\ShareCountServiceProvider"
+            ]
+        }
+    }
+}
