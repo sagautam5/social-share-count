@@ -19,13 +19,13 @@
   
   Laravel >= 7.0.*
    
-# Installation
+## Installation
 
 ```sh
 composer require sagautam5/social-share-count
 ```
 
-# Configuration
+## Configuration
 
 ## Facebook
 
@@ -44,7 +44,7 @@ Now, Clear the configuration cache.
 php artisan config:cache
 ```
 
-# Basic Usage
+## Basic Usage
 
 After installation, you can use the share count feature like this:
 
