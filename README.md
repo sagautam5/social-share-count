@@ -9,7 +9,7 @@
 )](https://github.com/sagautam5/social-share-count/stargazers) [![Twitter](https://img.shields.io/twitter/url?url=https%3A%2F%2Fgithub.com%2Fsagautam5%2Fsocial-share-count
 )](https://github.com/sagautam5/social-share-count/stargazers)
 
-# Social Share Count
+## Description
 
   Social share count is the laravel package to determine number of times a url is shared on social media like facebook. 
   
