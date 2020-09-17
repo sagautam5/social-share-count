@@ -17,7 +17,7 @@ class ShareCounter
      * @param $url
      * @return int
      */
-    public function getFacebookShares($url)
+    public static function getFacebookShares($url)
     {
         $client = new Client();
         $response = $client->get('https://graph.facebook.com/v3.0', [
