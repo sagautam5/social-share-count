@@ -1,7 +1,8 @@
 # Social Share Count
 
 ## This will help to count the social share count of a url
-
+[![Latest Stable Version](https://poser.pugx.org/sagautam5/social-share-count/v)](//packagist.org/packages/sagautam5/social-share-count)
+[![Total Downloads](https://poser.pugx.org/sagautam5/social-share-count/downloads)](//packagist.org/packages/sagautam5/social-share-count)
 ![Issues](https://img.shields.io/github/issues/sagautam5/social-share-count
 ) [![Stars](https://img.shields.io/github/stars/sagautam5/social-share-count
 )](https://github.com/sagautam5/social-share-count/stargazers) [![License](https://img.shields.io/github/license/sagautam5/social-share-count
