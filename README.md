@@ -24,9 +24,11 @@
 ```sh
 composer require sagautam5/social-share-count
 ```
+
 #Configuration
 
 ##Facebook
+
 At first, get App ID and App Secret by creating new app in https://developers.facebook.com. 
 ![Get App ID and Secret](https://raw.githubusercontent.com/sagautam5/social-share-count/master/src/images/facebook%20credentials.png)
 
