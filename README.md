@@ -45,6 +45,10 @@ Now, Clear the configuration cache.
 php artisan config:cache
 ```
 
+#### Pinterest
+
+Currently, you don't need any application id or secret to count pinterest shares. You can just call the function.
+
 ## Basic Usage
 
 After installation, you can use the share count feature like this:
@@ -53,8 +57,12 @@ After installation, you can use the share count feature like this:
 use Sagautam5\SocialShareCount\ShareCounter;
 
 $url = 'https://www.example.com';
-$shareCounts = ShareCounter::getFacebookShares($url);
-echo $shareCounts;
+
+$facebookShares = ShareCounter::getFacebookShares($url);
+echo $facebookShares;
+
+$pinterestShares = ShareCounter::getPinterestShares($url);
+echo $pinterestShares;
 ``` 
 
 
