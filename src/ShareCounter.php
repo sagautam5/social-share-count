@@ -4,6 +4,10 @@
 namespace Sagautam5\SocialShareCount;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
+use Sagautam5\SocialShareCount\Exceptions\EmptyFacebookCredentialsException;
+use Sagautam5\SocialShareCount\Exceptions\InvalidFacebookCredentialsException;
+use Sagautam5\SocialShareCount\Exceptions\InvalidUrlException;
 
 /**
  * Class ShareCounter
@@ -12,30 +16,40 @@ use GuzzleHttp\Client;
 class ShareCounter
 {
     /**
-     * Count no of facebook shares of a url
-     *
      * @param $url
      * @return int
+     * @throws \Throwable
      */
     public static function getFacebookShares($url)
     {
-        $client = new Client();
-        $response = $client->get('https://graph.facebook.com/v3.0', [
-            'query' =>
-                [
-                    'fields' => 'engagement',
-                    'access_token' => config('share_count.fb_app_id').'|'.config('share_count.fb_app_secret'),
-                    'id' => $url
-                ]
-        ]);
+        $count = 0;
 
-        if($response->getStatusCode() == 200)
-        {
-            $data = json_decode($response->getBody());
+        throw_if(!(config('share_count.fb_app_id') && config('share_count.fb_app_secret')), new EmptyFacebookCredentialsException('Please add facebook app id and app secret correctly !'));
 
-            return $data->engagement->share_count;
+        throw_if(!filter_var($url, FILTER_VALIDATE_URL), new InvalidUrlException('Please enter valid url !',400));
+
+        try{
+            $client = new Client();
+            $response = $client->get('https://graph.facebook.com/v3.0', [
+                'query' =>
+                    [
+                        'fields' => 'engagement',
+                        'access_token' => config('share_count.fb_app_id').'|'.config('share_count.fb_app_secret'),
+                        'id' => $url
+                    ]
+            ]);
+
+            if($response->getStatusCode() == 200)
+            {
+                $data = json_decode($response->getBody());
+
+                $count = $data->engagement->share_count;
+            }
+
+        }catch (ClientException $e){
+            throw new InvalidFacebookCredentialsException('Facebook App ID and App Secret are incorrect !');
         }
 
-        return 0;
+        return $count;
     }
 }
