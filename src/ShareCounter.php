@@ -108,4 +108,36 @@ class ShareCounter
 
         return $count;
     }
+
+    /**
+     * Get Reddit Shares
+     *
+     * @param $url
+     * @return mixed
+     * @throws \Throwable
+     */
+    public static function getRedditShares($url)
+    {
+        /**
+         * Check if valid URL is added
+         */
+        throw_if(!filter_var($url, FILTER_VALIDATE_URL), new InvalidUrlException('Please enter valid url http or https !',400));
+
+        /**
+         * Hit Pinterest API
+         */
+        $response = file_get_contents('https://www.reddit.com/api/info.json?limit=1&url='.$url);
+
+        /**
+         * Format data
+         */
+        $response = json_decode($response);
+
+        /**
+         * Get Counts
+         */
+        $count = $response->data->children[0]->data->score;
+
+        return $count;
+    }
 }
