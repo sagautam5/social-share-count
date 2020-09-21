@@ -14,6 +14,21 @@ use Sagautam5\SocialShareCount\Exceptions\InvalidUrlException;
 class ShareCounter
 {
     /**
+     * Facebook Api End Point
+     */
+    const FACEBOOK_API = 'https://graph.facebook.com/v3.0';
+
+    /**
+     * Pinterest Api End Point
+     */
+    const PINTEREST_API = 'https://api.pinterest.com/v1/urls/count.json';
+
+    /**
+     * Reddit Api End Point
+     */
+    const REDDIT_API = 'https://www.reddit.com/api/info.json';
+
+    /**
      * @param $url
      * @return int
      * @throws \Throwable
@@ -46,7 +61,7 @@ class ShareCounter
              * Hit Facebook API
              */
 
-            $response = file_get_contents('https://graph.facebook.com/v3.0?fields=engagement&&access_token='.config('share_count.fb_app_id').'|'.config('share_count.fb_app_secret').'&id='.$url);
+            $response = file_get_contents(self::FACEBOOK_API.'?fields=engagement&&access_token='.config('share_count.fb_app_id').'|'.config('share_count.fb_app_secret').'&id='.$url);
 
             /**
              * Format the response
@@ -80,7 +95,7 @@ class ShareCounter
         /**
          * Hit Pinterest API
          */
-        $response = file_get_contents('https://api.pinterest.com/v1/urls/count.json?callback=receiveCount&url='.$url);
+        $response = file_get_contents(self::PINTEREST_API.'?callback=receiveCount&url='.$url);
 
         /**
          * Format the response
@@ -116,7 +131,7 @@ class ShareCounter
         /**
          * Hit Pinterest API
          */
-        $response = file_get_contents('https://www.reddit.com/api/info.json?limit=1&url='.$url);
+        $response = file_get_contents(self::REDDIT_API.'?limit=1&url='.$url);
 
         /**
          * Format data
