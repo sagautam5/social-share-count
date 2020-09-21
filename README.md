@@ -19,6 +19,11 @@
   PHP >= 7.3.*
   
   Laravel >= 7.0.*
+  
+## Support
+- Facebook
+- Pinterest
+- Reddit  
    
 ## Installation
 
@@ -49,6 +54,10 @@ php artisan config:cache
 
 Currently, you don't need any application id or secret to count pinterest shares. You can just call the function.
 
+#### Reddit
+
+Currently, you don't need any application id or secret to count reddit shares. You can just call the function.
+
 ## Basic Usage
 
 After installation, you can use the share count feature like this:
@@ -63,6 +72,9 @@ echo $facebookShares;
 
 $pinterestShares = ShareCounter::getPinterestShares($url);
 echo $pinterestShares;
+
+$redditShares = ShareCounter::getRedditShares($url);
+echo $redditShares;
 ``` 
 
 
