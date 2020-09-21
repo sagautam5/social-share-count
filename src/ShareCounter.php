@@ -3,8 +3,6 @@
 
 namespace Sagautam5\SocialShareCount;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ClientException;
 use Sagautam5\SocialShareCount\Exceptions\EmptyFacebookCredentialsException;
 use Sagautam5\SocialShareCount\Exceptions\InvalidFacebookCredentialsException;
 use Sagautam5\SocialShareCount\Exceptions\InvalidUrlException;
@@ -48,27 +46,19 @@ class ShareCounter
              * Hit Facebook API
              */
 
-            $client = new Client();
-            $response = $client->get('https://graph.facebook.com/v3.0', [
-                'query' =>
-                    [
-                        'fields' => 'engagement',
-                        'access_token' => config('share_count.fb_app_id').'|'.config('share_count.fb_app_secret'),
-                        'id' => $url
-                    ]
-            ]);
+            $response = file_get_contents('https://graph.facebook.com/v3.0?fields=engagement&&access_token='.config('share_count.fb_app_id').'|'.config('share_count.fb_app_secret').'&id='.$url);
 
-            if($response->getStatusCode() == 200)
-            {
-                /**
-                 * Format the data
-                 */
-                $data = json_decode($response->getBody());
+            /**
+             * Format the response
+             */
+            $response = json_decode($response);
 
-                $count = $data->engagement->share_count;
-            }
+            /**
+             * Count the shares
+             */
+            $count = $response->engagement->share_count;
 
-        }catch (ClientException $e){
+        }catch (\Exception $e){
             throw new InvalidFacebookCredentialsException('Facebook App ID and App Secret are incorrect !');
         }
 
