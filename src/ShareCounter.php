@@ -141,7 +141,11 @@ class ShareCounter
         /**
          * Get Counts
          */
-        $count = $response->data->children[0]->data->score;
+        $count = $response &&
+            $response->data &&
+            count($response->data->children) > 0 &&
+            $response->data->children[0]->data &&
+            $response->data->children[0]->data->score ? $response->data->children[0]->data->score : 0;
 
         return $count;
     }
